@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meme Generator</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body onload="onInit()">
+
+    <header class="main-header flex space-between align-center">
+        <div class="nav-logo"><img src="ICONS/LOGO.png" alt=""></div>
+        <nav class="nav-list">
+            <ul class="list-items clean-list flex">
+                <li><a href=""></a>Gallery</li> |
+                <li><a href=""></a>About</li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="search-bar flex space-between align-center">
+        <div>
+            <input class="search-inpur" type="search" id="mySearch" name="search-meme" placeholder="Search for meme"
+                onkeyup="onSearch(this.value)">
+            <button class="search-btn"><img src="ICONS/search-icon.png" alt=""></button>
+        </div>
+        <div class="keywords">
+            <ul class="keywords-list clean-list flex space-between"></ul>
+        </div>
+    </div>
+
+    <main class="img-gallery">
+    </main>
+
+    <!-- Modal Meme-generator -->
+    <div class="meme-container">
+        <div class="meme-editor">
+            <button class="close-btn" onclick="closeWindow()"><img src="ICONS/close.png" alt=""></button>
+            <div class="canvas-container">
+                <canvas id="meme-canvas" height="500" width="500" onclick="onLinePos(event)"
+                    onmousedown="onMoveTxt(event)" onmousemove="onMoveTxt(event)" onmouseup="onMoveTxt(event)"></canvas>
+            </div>
+
+            <div class="canvas-editor">
+                <input type="text" name="line" class="input-line" oninput="showLine()">
+                <div class="first-btn">
+                    <button onclick="onMoveLine(-5)"><img src="ICONS/arrow-up.png" alt=""></button>
+                    <button onclick="onMoveLine(5)"><img src="ICONS/down-arrow.png" alt=""></button>
+                    <button onclick="onAddLine()"><img src="ICONS/add.png" alt=""></button>
+                    <button onclick="onDelete()"><img src="ICONS/trash.png" alt=""></button>
+                    <button onclick="onSwitchLine()"><img
+                            src="ICONS/up-and-down-opposite-double-arrows-side-by-side.png" alt=""></button>
+                </div>
+                <div class="edit-style">
+                    <button onclick="onChangeFontSize(2)"><img src="ICONS/increase font - icon.png" alt=""></button>
+                    <button onclick="onChangeFontSize(-2)"><img src="ICONS/decrease font - icon.png" alt=""></button>
+                    <button onclick="onTextAlign('right')"><img src="ICONS/align-to-left.png" alt=""></button>
+                    <button onclick="onTextAlign('center')"><img src="ICONS/center-text-alignment.png" alt=""></button>
+                    <button onclick="onTextAlign('left')"><img src="ICONS/align-to-right.png" alt=""></button>
+                </div>
+                <div class="local-storage">
+                    <button class="download-btn">
+                        <a href="#" onclick="downloadCanvas(this)" download=""><img src="ICONS/download.png" alt=""></a>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+
+    </div>
+
+    <script src="js/storage-service.js"></script>
+    <script src="js/util.js"></script>
+    <script src="js/meme-service.js"></script>
+    <script src="js/meme-controller.js"></script>
+</body>
+
+</html>
