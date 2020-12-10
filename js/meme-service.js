@@ -26,7 +26,7 @@ var gImgs = [
 ];
 
 var gKeywords = ['man', 'kids', 'woman', 'animals', 'cute', 'funny', 'all']
-var gKeywordsObj = { 'man': 1, 'kids': 1, 'woman': 1, 'animals': 1, 'cute': 1, 'funny': 1 }
+var gKeywordsObj = { 'man': 1, 'kids': 1, 'woman': 1, 'animals': 1, 'cute': 1, 'funny': 1, 'all':1 }
 
 var gNumLine = 0;
 var gCurrLine = gNumLine;
@@ -68,7 +68,7 @@ function getMeme() {
 }
 
 function addLine(line) {
-    var newLine = { numLine: gNumLine++, txt: line, size: 60, align: 'center', color: 'red', diff: 0 }
+    var newLine = { numLine: gNumLine++, txt: line, size: 60, align: 'center', color: 'white', diff: 0 }
     switch (gNumLine) {
         case 1:
             newLine.posX = 250
@@ -118,8 +118,13 @@ function changeFontSize(diff, clickedLine) {
 }
 
 function textAlign(direction, clickedLine) {
-    var txtLine = getLineByLineNum(clickedLine)
-    txtLine.align = direction
+    var txtLine = getLineByLineNum(clickedLine);
+    txtLine.align = direction;
+}
+
+function chnageColor(color, clickedLine){
+    var txtLine = getLineByLineNum(clickedLine);
+    txtLine.color = color;
 }
 
 function clearMeme() {
@@ -156,11 +161,15 @@ function search(search) {
 }
 
 function setWordSize(filter) {
-    gKeywordsObj[filter]++;
+    gKeywordsObj[filter]+= 0.5;
 }
 
 function getWordsObj() {
     return gKeywordsObj
+}
+
+function saveToStorage(){
+    console.log('save canvas');
 }
 
 

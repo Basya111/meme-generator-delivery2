@@ -36,7 +36,7 @@ function renderKeyWords() {
     var strHTMLs = keywords.map(function (word) {
         console.log(kysObj[word]);
         return `
-        <li class="${word}" onclick="onSetFilter('${word}')" style="font-size: '${kysObj[word]}'rem;">${word}</li>`
+        <li class="${word}" onclick="onSetFilter('${word}')" style="font-size: ${kysObj[word]}rem;">${word}</li>`
     })
     document.querySelector('.keywords-list').innerHTML = strHTMLs.join('')
 }
@@ -147,6 +147,14 @@ function closeWindow() {
     onClearCnavas()
 }
 
+function onChangeColor(){
+    let color = document.querySelector('input[name=txt-color]').value
+    if(!color) color = 'white'
+    let clickedLine = getCurrLine()
+    chnageColor(color, clickedLine)
+    renderImgCanvas()
+}
+
 
 
 
@@ -183,7 +191,7 @@ function drawText(lines, x = 250, y = 250) {
         var text = line.txt
         gCtx.lineWidth = '1.5'
         gCtx.strokeStyle = 'black 2px'
-        gCtx.fillStyle = 'white'
+        gCtx.fillStyle = `${line.color}`
         gCtx.font = `${line.size}px Impact`
         // gCtx.font = 'larger 900 40px Impact'
         gCtx.textAlign = line.align
@@ -262,5 +270,9 @@ function downloadCanvas(elLink) {
     console.log(data)
     elLink.href = data;
     elLink.download = 'my-canvas.jpg';
+}
+
+function onSaveToStorage(){
+    saveToStorage()
 }
 

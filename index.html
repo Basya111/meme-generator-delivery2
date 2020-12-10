@@ -59,18 +59,43 @@
                     <button onclick="onTextAlign('right')"><img src="ICONS/align-to-left.png" alt=""></button>
                     <button onclick="onTextAlign('center')"><img src="ICONS/center-text-alignment.png" alt=""></button>
                     <button onclick="onTextAlign('left')"><img src="ICONS/align-to-right.png" alt=""></button>
+                    <button onclick="onChangeColor()">
+                        <img src="ICONS/paint-board-and-brush.png" alt="">
+                        <input type="color" name="txt-color">
+                    </button>
                 </div>
                 <div class="local-storage">
                     <button class="download-btn">
                         <a href="#" onclick="downloadCanvas(this)" download=""><img src="ICONS/download.png" alt=""></a>
                     </button>
+                    <button onclick="onSaveToStorage()"><img src="ICONS/save.png" alt=""></button>
                 </div>
 
             </div>
         </div>
-
-
     </div>
+
+    <div class="social-network">
+        <div class="profile-picture"><img src="img/20.jpg" alt=""></div>
+        <div class="side-desc">
+            <div class="description">
+                    <h2>Monica Ponica</h2>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet consectetur, quibusdam atque illum, nobis exercitationem animi natus placeat eius quidem voluptatum unde quae? Dicta vero corporis explicabo quod, obcaecati ipsa!</p>
+            </div>
+            <div class="icons">
+                <ul class="icons-list clean-list flex space-between">
+                    <li><img src="ICONS/linkedin-logo.png" alt=""></li>
+                    <li><img src="ICONS/facebook-logo.png" alt=""></li>
+                    <li><img src="ICONS/github-logo.png" alt=""></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <footer class="my-footer">
+          <div class="footer-logo"><img src="ICONS/LOGO.png" alt=""></div>
+        <small class="small-letters">© 2020 All Rights Reserved- To Me And Only Me!</small>  
+    </footer>
 
     <script src="js/storage-service.js"></script>
     <script src="js/util.js"></script>
