@@ -12,8 +12,7 @@ var gIsMoveing = false;
 
 function onInit() {
     console.log('Page is ready');
-    gCanvas = document.getElementById('meme-canvas')
-    gCtx = gCanvas.getContext('2d')
+    
     renderKeyWords()
     renderImgGallery()
 }
@@ -34,7 +33,6 @@ function renderKeyWords() {
     var keywords = getKeyWords()
     var kysObj = getKeysObj()
     var strHTMLs = keywords.map(function (word) {
-        console.log(kysObj[word]);
         return `
         <li class="${word}" onclick="onSetFilter('${word}')" style="font-size: ${kysObj[word]}rem;">${word}</li>`
     })
@@ -44,9 +42,10 @@ function renderKeyWords() {
 function onGetImg(imgId) {
     var img = getImgById(imgId);
     gCurrImg = img;
-    console.log(gCurrImg);
     var elMemeContainer = document.querySelector('.meme-container')
     elMemeContainer.style.display = 'flex'
+    var elScreen = document.querySelector('.main-screen')
+    elScreen.classList.add('.open-canvas')
     renderImgCanvas()
 }
 
@@ -59,9 +58,8 @@ function onSetFilter(elFilter) {
     renderKeyWords()
 }
 
-function onSearch(elSearch) {
-    console.log('search by', elSearch);
-    search(elSearch);
+function onSearch(elFilter) {
+    search(elFilter);
     renderImgGallery()
 }
 
@@ -144,6 +142,8 @@ function onTextAlign(direction) {
 function closeWindow() {
     var elMemeContainer = document.querySelector('.meme-container')
     elMemeContainer.style.display = 'none'
+    var elScreen = document.querySelector('.main-screen')
+    elScreen.classList.remove('open-canvas')
     onClearCnavas()
 }
 
@@ -161,6 +161,8 @@ function onChangeColor(){
 // ------------- canvas-------------
 
 function renderImgCanvas() {
+    gCanvas = document.getElementById('meme-canvas')
+    gCtx = gCanvas.getContext('2d')
     onGetMeme()
     var meme = gCurrMeme
     var memeLines = meme.lines
@@ -186,7 +188,6 @@ function drawImg(memeLines, x, y) {
 
 
 function drawText(lines, x = 250, y = 250) {
-
     lines.forEach(line => {
         var text = line.txt
         gCtx.lineWidth = '1.5'
@@ -226,9 +227,9 @@ function onLinePos(ev) {
 function getCurrLine() {
     var line;
     if (!gItemPos) line = 0;
-    else if (gItemPos.posY < 150) line = 0;
-    else if (gItemPos.posY < 300) line = 2;
-    else if (gItemPos.posY > 300) line = 1;
+    else if (gItemPos.posY < 150) line = 1;
+    else if (gItemPos.posY < 300) line = 3;
+    else if (gItemPos.posY > 300) line = 2;
     gCurrLine = line;
     return gCurrLine
 }
@@ -272,7 +273,9 @@ function downloadCanvas(elLink) {
     elLink.download = 'my-canvas.jpg';
 }
 
+
+
 function onSaveToStorage(){
-    saveToStorage()
+    createMemes()
 }
 

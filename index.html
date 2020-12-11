@@ -10,20 +10,30 @@
 
 <body onload="onInit()">
 
+    <div class="main-screen"></div>
     <header class="main-header flex space-between align-center">
-        <div class="nav-logo"><img src="ICONS/LOGO.png" alt=""></div>
+        <div class="nav-logo"><img src="ICONS/layer-2_2020-12-11/layer-2@3x.png" alt=""></div>
         <nav class="nav-list">
             <ul class="list-items clean-list flex">
-                <li><a href=""></a>Gallery</li> |
-                <li><a href=""></a>About</li>
+                <li><a href="#gallery">Gallery</a></li> |
+                <li><a href="">Memes</a></li> |
+                <li><a href="#about">About</a></li>
             </ul>
         </nav>
     </header>
 
     <div class="search-bar flex space-between align-center">
         <div>
-            <input class="search-inpur" type="search" id="mySearch" name="search-meme" placeholder="Search for meme"
-                onkeyup="onSearch(this.value)">
+            <input class="search-inpur" type="search" id="mySearch" name="search-meme" placeholder="Search for keyword"
+               list="keywords" onkeyup="onSearch(this.value)">
+            <datalist id="keywords">
+                <option value="funny">
+                <option value="cute">
+                <option value="man">
+                <option value="woman">
+                <option value="animals">
+                <option value="kids">
+            </datalist>
             <button class="search-btn"><img src="ICONS/search-icon.png" alt=""></button>
         </div>
         <div class="keywords">
@@ -32,6 +42,7 @@
     </div>
 
     <main class="img-gallery">
+        <a name="gallery"></a>
     </main>
 
     <!-- Modal Meme-generator -->
@@ -44,7 +55,7 @@
             </div>
 
             <div class="canvas-editor">
-                <input type="text" name="line" class="input-line" oninput="showLine()">
+                <input type="text" name="line" class="input-line" placeholder="Write something!" oninput="showLine()">
                 <div class="first-btn">
                     <button onclick="onMoveLine(-5)"><img src="ICONS/arrow-up.png" alt=""></button>
                     <button onclick="onMoveLine(5)"><img src="ICONS/down-arrow.png" alt=""></button>
@@ -59,6 +70,10 @@
                     <button onclick="onTextAlign('right')"><img src="ICONS/align-to-left.png" alt=""></button>
                     <button onclick="onTextAlign('center')"><img src="ICONS/center-text-alignment.png" alt=""></button>
                     <button onclick="onTextAlign('left')"><img src="ICONS/align-to-right.png" alt=""></button>
+                    <select name="select-font" id="">
+                        <option value="impact">Impact</option>
+                        <option value="sans-serif">Sans serif</option>
+                    </select>
                     <button onclick="onChangeColor()">
                         <img src="ICONS/paint-board-and-brush.png" alt="">
                         <input type="color" name="txt-color">
@@ -69,6 +84,11 @@
                         <a href="#" onclick="downloadCanvas(this)" download=""><img src="ICONS/download.png" alt=""></a>
                     </button>
                     <button onclick="onSaveToStorage()"><img src="ICONS/save.png" alt=""></button>
+                    <form class="share-form" action="" method="POST" enctype="multipart/form-data" onsubmit="uploadImg(this, event)">
+                        <input name="img" id="imgData" type="hidden" />
+                        <button class="btn" type="submit">Share</button>
+                        <div class="share-container"></div>
+                    </form>
                 </div>
 
             </div>
@@ -76,11 +96,13 @@
     </div>
 
     <div class="social-network">
+        <a name="about"></a>
         <div class="profile-picture"><img src="img/20.jpg" alt=""></div>
         <div class="side-desc">
             <div class="description">
-                    <h2>Monica Ponica</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet consectetur, quibusdam atque illum, nobis exercitationem animi natus placeat eius quidem voluptatum unde quae? Dicta vero corporis explicabo quod, obcaecati ipsa!</p>
+                <h2>Monica Ponica</h2>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet consectetur, quibusdam atque illum,
+                    nobis exercitationem animi natus placeat eius quid</p>
             </div>
             <div class="icons">
                 <ul class="icons-list clean-list flex space-between">
@@ -93,11 +115,12 @@
     </div>
 
     <footer class="my-footer">
-          <div class="footer-logo"><img src="ICONS/LOGO.png" alt=""></div>
-        <small class="small-letters">© 2020 All Rights Reserved- To Me And Only Me!</small>  
+        <div class="footer-logo"><img src="ICONS/layer-2_2020-12-11/layer-2@3x.png" alt=""></div>
+        <small class="small-letters">© 2020 All Rights Reserved- To Me And Only Me!</small>
     </footer>
 
     <script src="js/storage-service.js"></script>
+    <script src="js/upload-service.js"></script>
     <script src="js/util.js"></script>
     <script src="js/meme-service.js"></script>
     <script src="js/meme-controller.js"></script>
