@@ -42,10 +42,13 @@ function renderKeyWords() {
 function onGetImg(imgId) {
     var img = getImgById(imgId);
     gCurrImg = img;
+    document.querySelector('.search-bar').style.display = 'none'
+    document.querySelector('.img-gallery').style.display = 'none'
+    document.querySelector('.social-network').style.display = 'none'
     var elMemeContainer = document.querySelector('.meme-container')
     elMemeContainer.style.display = 'flex'
-    var elScreen = document.querySelector('.main-screen')
-    elScreen.classList.add('.open-canvas')
+    // var elScreen = document.querySelector('.main-screen')
+    // elScreen.classList.add('.open-canvas')
     renderImgCanvas()
 }
 
@@ -142,8 +145,11 @@ function onTextAlign(direction) {
 function closeWindow() {
     var elMemeContainer = document.querySelector('.meme-container')
     elMemeContainer.style.display = 'none'
-    var elScreen = document.querySelector('.main-screen')
-    elScreen.classList.remove('open-canvas')
+    document.querySelector('.search-bar').style.display = 'flex'
+    document.querySelector('.img-gallery').style.display = 'grid'
+    document.querySelector('.social-network').style.display = 'block'
+    // var elScreen = document.querySelector('.main-screen')
+    // elScreen.classList.remove('open-canvas')
     onClearCnavas()
 }
 
