@@ -32,11 +32,10 @@ var gNumLine = 0;
 var gCurrLine = gNumLine;
 var gFilterBy;
 var gFilterByLetters;
-// var gCurrPos = {posX, posY}
+// var gCurrPos = {posX: 100, posY:100}
 
 var gMeme;
 var gMemes;
-
 
 _createMeme()
 
@@ -102,6 +101,7 @@ function _createMeme(){
     }
     gMeme = meme
 }
+
 
 
 function addLine(line) {

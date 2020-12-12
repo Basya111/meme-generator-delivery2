@@ -12,7 +12,7 @@ var gIsMoveing = false;
 
 function onInit() {
     console.log('Page is ready');
-    
+
     renderKeyWords()
     renderImgGallery()
 }
@@ -153,9 +153,9 @@ function closeWindow() {
     onClearCnavas()
 }
 
-function onChangeColor(){
+function onChangeColor() {
     let color = document.querySelector('input[name=txt-color]').value
-    if(!color) color = 'white'
+    if (!color) color = 'white'
     let clickedLine = getCurrLine()
     chnageColor(color, clickedLine)
     renderImgCanvas()
@@ -212,7 +212,7 @@ function drawText(lines, x = 250, y = 250) {
                 y = line.posY + line.diff
             }
         }
-        else if(gIsMoveing){
+        else if (gIsMoveing) {
             x = line.posX;
             y = line.posY;
         }
@@ -233,7 +233,7 @@ function onLinePos(ev) {
 function getCurrLine() {
     var line;
     if (!gItemPos) line = 0;
-    else if (gItemPos.posY < 150) line = 1;
+    else if (gItemPos.posY < 100 || (gItemPos.posX > 300 && gItemPos.posY > 180)) line = 1;
     else if (gItemPos.posY < 300) line = 3;
     else if (gItemPos.posY > 300) line = 2;
     gCurrLine = line;
@@ -242,7 +242,7 @@ function getCurrLine() {
 
 function onMoveTxt(ev) {
     // console.log(ev);
-    ev.preventDefault()
+    // ev.preventDefault()
     if (ev.type === 'mousedown') {
         gIsMoveing = true;
         gItemPos.posX = ev.offsetX;
@@ -253,15 +253,45 @@ function onMoveTxt(ev) {
         gPrevX = gItemPos.posX;
         gPrevY = gItemPos.posY;
         gItemPos.posX = ev.offsetX;
-        gItemPos.posY = ev.offsetY;        
+        gItemPos.posY = ev.offsetY;
         moveTxt(gItemPos.posX, gItemPos.posY)
 
     }
     else if (ev.type === 'mouseup') gIsMoveing = false;
 }
 
-function moveTxt(x, y){
+
+function moveByTouch(ev) {
+    ev.preventDefault()
     var clickedLine = getCurrLine()
+    var touch = ev.touches[0];
+    var posX;
+    var posY;
+    if (ev.type === 'touchstart') {
+        posX = touch.pageX
+        posY = touch.pageY
+        gItemPos = { posX, posY }
+        gIsMoveing = true;
+        gItemPos.posX = touch.pageX;
+        gItemPos.posY = touch.pageY;
+    }
+    else if (ev.type === 'touchmove') {
+        if (!gIsMoveing) return
+        gPrevX = gItemPos.posX
+        gPrevY = gItemPos.posY
+        gItemPos.posX = touch.pageX;
+        gItemPos.posY = touch.pageY;
+        // console.log(gItemPos.posX, gItemPos.posY);
+        moveTxt(gItemPos.posX, gItemPos.posY)
+
+    }
+    else if (ev.type === 'touchend') gIsMoveing = false;
+}
+
+
+function moveTxt(x, y) {
+    var clickedLine = getCurrLine()
+    // console.log('x:', x, 'y:', y, clickedLine);
     updateMoveLine(x, y, clickedLine)
     renderImgCanvas()
 }
@@ -281,7 +311,11 @@ function downloadCanvas(elLink) {
 
 
 
-function onSaveToStorage(){
+function onSaveToStorage() {
     createMemes()
+}
+
+function toggleMenu() {
+    document.body.classList.toggle('open-menu');
 }
 

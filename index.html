@@ -10,16 +10,18 @@
 
 <body onload="onInit()">
 
-    <div class="main-screen"></div>
+    <div class="main-screen" onclick="toggleMenu()"></div>
     <header class="main-header flex space-between align-center">
         <div class="nav-logo"><img src="ICONS/layer-2_2020-12-11/layer-2@3x.png" alt=""></div>
         <nav class="nav-list">
+            <button class="close-btn" onclick="toggleMenu()">X</button>
             <ul class="list-items clean-list flex">
-                <li><a href="#gallery">Gallery</a></li> |
-                <li><a href="">Memes</a></li> |
+                <li><a href="#gallery">Gallery</a></li> 
+                <li><a href="">Memes</a></li> 
                 <li><a href="#about">About</a></li>
             </ul>
         </nav>
+        <button class="menu-btn" onclick="toggleMenu()">☰</button>
     </header>
 
     <div class="search-bar flex space-between align-center">
@@ -51,7 +53,8 @@
             <button class="close-btn" onclick="closeWindow()"><img src="ICONS/close.png" alt=""></button>
             <div class="canvas-container">
                 <canvas id="meme-canvas" height="500" width="500" onclick="onLinePos(event)"
-                    onmousedown="onMoveTxt(event)" onmousemove="onMoveTxt(event)" onmouseup="onMoveTxt(event)"></canvas>
+                    onmousedown="onMoveTxt(event)" onmousemove="onMoveTxt(event)" onmouseup="onMoveTxt(event)" ontouchstart="moveByTouch(event)" ontouchmove="moveByTouch(event)"
+                    ontouchend="moveByTouch(event)"></canvas>
             </div>
 
             <div class="canvas-editor">
@@ -86,7 +89,7 @@
                     <button onclick="onSaveToStorage()"><img src="ICONS/save.png" alt=""></button>
                     <form class="share-form" action="" method="POST" enctype="multipart/form-data" onsubmit="uploadImg(this, event)">
                         <input name="img" id="imgData" type="hidden" />
-                        <button class="btn" type="submit">Share</button>
+                        <button class="share-btn" type="submit">Share</button>
                         <div class="share-container"></div>
                     </form>
                 </div>
@@ -97,7 +100,7 @@
 
     <div class="social-network">
         <a name="about"></a>
-        <div class="profile-picture"><img src="img/20.jpg" alt=""></div>
+        <div class="profile-picture"><img src="img/monica.png" alt=""></div>
         <div class="side-desc">
             <div class="description">
                 <h2>Monica Ponica</h2>
