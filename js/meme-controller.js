@@ -242,9 +242,9 @@ function onLinePos(ev) {
 function getCurrLine() {
     var line;
     if (!gItemPos) line = 0;
-    else if (gItemPos.posY < 100) line = 1;
-    else if (gItemPos.posY < 300) line = 3;
-    else if (gItemPos.posY > 300) line = 2;
+    else if (gItemPos.posY < (gCanvas.width/ 5)) line = 1;
+    else if (gItemPos.posY < (gCanvas.width/ 2.5)) line = 3;
+    else if (gItemPos.posY > (gCanvas.width/ 1.2)) line = 2;
     gCurrLine = line;
     return gCurrLine
 }
@@ -270,6 +270,7 @@ function drawRect(x, y) {
 function onMoveTxt(ev) {
     // console.log(ev);
     // ev.preventDefault()
+    if(!gItemPos) gItemPos = {posX: gCanvas.width/2, posY: gCanvas.width/2}
     if (ev.type === 'mousedown') {
         gIsMoveing = true;
         gItemPos.posX = ev.offsetX;
@@ -325,6 +326,7 @@ function moveTxt(x, y) {
 
 function onClearCnavas() {
     gCtx.clearRect(0, 0, gCanvas.width, gCanvas.height)
+    gItemPos = {posX: gCanvas.width/2, posY: gCanvas.width/2}
     clearMeme()
     renderImgCanvas()
 }

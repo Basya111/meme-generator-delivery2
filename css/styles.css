@@ -111,6 +111,9 @@ a {
     margin: 0 3px;
     padding: 20px 5px;
 }
+.keywords-list:hover{
+    cursor: pointer;
+}
 
 input[type="search"] {
     padding: 11px;
