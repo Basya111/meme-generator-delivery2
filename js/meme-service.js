@@ -32,6 +32,7 @@ var gNumLine = 0;
 var gCurrLine = gNumLine;
 var gFilterBy;
 var gFilterByLetters;
+var gCanvas = {width: 500, heigth: 500}
 // var gCurrPos = {posX: 100, posY:100}
 
 var gMeme;
@@ -63,6 +64,7 @@ function getMeme() {
 }
 
 function _createMeme(){
+    // var canvas = getCanvas();
     var meme = {
         selectedImgId: 1,
         selectedLineIdx: 0,
@@ -73,8 +75,8 @@ function _createMeme(){
                 size: 60,
                 align: 'center',
                 color: 'white',
-                posX: 250,
-                posY: 100,
+                posX: gCanvas.width/ 2,
+                posY: gCanvas.heigth/ 5,
                 diff: 0
             },
             {
@@ -83,8 +85,8 @@ function _createMeme(){
                 size: 60,
                 align: 'center',
                 color: 'white',
-                posX: 250,
-                posY: 400,
+                posX: gCanvas.width/ 2,
+                posY: gCanvas.heigth/ 1.2,
                 diff: 0
             },
             {
@@ -93,8 +95,8 @@ function _createMeme(){
                 size: 60,
                 align: 'center',
                 color: 'white',
-                posX: 250,
-                posY: 250,
+                posX: gCanvas.width/ 2,
+                posY: gCanvas.heigth/ 2,
                 diff: 0
             }
         ]
@@ -161,6 +163,7 @@ function chnageColor(color, clickedLine) {
     txtLine.color = color;
 }
 
+
 function clearMeme() {
     _createMeme()
     gNumLine = 0
@@ -212,6 +215,11 @@ function createMemes(){
     }
     gMemes = memes;
     _saveMemessToStorage()
+}
+
+function updateCanvasWidth(width){
+    gCanvas.width = width;
+    gCanvas.heigth = width;
 }
 
 

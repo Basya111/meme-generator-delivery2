@@ -50,8 +50,8 @@
     <!-- Modal Meme-generator -->
     <div class="meme-container">
         <div class="meme-editor">
-            <button class="close-btn" onclick="closeWindow()"><img src="ICONS/close.png" alt=""></button>
             <div class="canvas-container">
+                <button class="close-btn" onclick="closeWindow()"><img src="ICONS/close.png" alt=""></button>
                 <canvas id="meme-canvas" height="500" width="500" onclick="onLinePos(event)"
                     onmousedown="onMoveTxt(event)" onmousemove="onMoveTxt(event)" onmouseup="onMoveTxt(event)" ontouchstart="moveByTouch(event)" ontouchmove="moveByTouch(event)"
                     ontouchend="moveByTouch(event)"></canvas>
@@ -73,7 +73,7 @@
                     <button onclick="onTextAlign('right')"><img src="ICONS/align-to-left.png" alt=""></button>
                     <button onclick="onTextAlign('center')"><img src="ICONS/center-text-alignment.png" alt=""></button>
                     <button onclick="onTextAlign('left')"><img src="ICONS/align-to-right.png" alt=""></button>
-                    <select name="select-font" id="">
+                    <select name="select-font" id="" onclick="changhFont(this.value)">
                         <option value="impact">Impact</option>
                         <option value="sans-serif">Sans serif</option>
                     </select>

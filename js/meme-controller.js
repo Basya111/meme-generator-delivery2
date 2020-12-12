@@ -9,10 +9,10 @@ var gPrevX;
 var gPrevY;
 var gCurrLine;
 var gIsMoveing = false;
+var gIsFoucs;
 
 function onInit() {
     console.log('Page is ready');
-
     renderKeyWords()
     renderImgGallery()
 }
@@ -47,9 +47,11 @@ function onGetImg(imgId) {
     document.querySelector('.social-network').style.display = 'none'
     var elMemeContainer = document.querySelector('.meme-container')
     elMemeContainer.style.display = 'flex'
-    // var elScreen = document.querySelector('.main-screen')
-    // elScreen.classList.add('.open-canvas')
     renderImgCanvas()
+}
+
+function getCanvas() {
+    return gCanvas
 }
 
 function onSetFilter(elFilter) {
@@ -86,6 +88,8 @@ function onAddLine() {
     addLine(line)
     document.querySelector('input[name=line]').value = '';
     renderImgCanvas()
+    // console.log(gCanvas.width); 
+    // console.log(gCanvas.height); 
 }
 
 
@@ -161,6 +165,11 @@ function onChangeColor() {
     renderImgCanvas()
 }
 
+// function changhFont(elFont){
+//     gCtx.text = `${elFont}`
+//     renderImgCanvas()
+// }
+
 
 
 
@@ -196,8 +205,8 @@ function drawImg(memeLines, x, y) {
 function drawText(lines, x = 250, y = 250) {
     lines.forEach(line => {
         var text = line.txt
-        gCtx.lineWidth = '1.5'
-        gCtx.strokeStyle = 'black 2px'
+        gCtx.lineWidth = 4;
+        gCtx.strokeStyle = 'black'
         gCtx.fillStyle = `${line.color}`
         gCtx.font = `${line.size}px Impact`
         // gCtx.font = 'larger 900 40px Impact'
@@ -233,12 +242,30 @@ function onLinePos(ev) {
 function getCurrLine() {
     var line;
     if (!gItemPos) line = 0;
-    else if (gItemPos.posY < 100 || (gItemPos.posX > 300 && gItemPos.posY > 180)) line = 1;
+    else if (gItemPos.posY < 100) line = 1;
     else if (gItemPos.posY < 300) line = 3;
     else if (gItemPos.posY > 300) line = 2;
     gCurrLine = line;
     return gCurrLine
 }
+
+function drawRect(x, y) {
+    gCtx.beginPath()
+    gCtx.strokeStyle = 'black'
+    gCtx.shadowBlur = 0;
+    gCtx.rect(x, y, 300, 100) // x,y,widht,height
+    gCtx.stroke()
+}
+
+// function drawFocusLine() {
+//     console.log('hey');
+//     if (!clickedLine) return
+//     var x = gItemPos.posX
+//     var y = gItemPos.posY
+//     //     // drawAllTxt()
+//     drawRect(x, y)
+//     renderImgCanvas()
+// }
 
 function onMoveTxt(ev) {
     // console.log(ev);
@@ -317,5 +344,13 @@ function onSaveToStorage() {
 
 function toggleMenu() {
     document.body.classList.toggle('open-menu');
+}
+
+function onUpdateCanvasWidth() {
+    var width = 500;
+    if (gCanvas.width === 500) width = 500;
+    else if (gCanvas.width === 450) width = 450
+    else if (gCanvas.width === 370) width = 370
+    updateCanvasWidth(width)
 }
 
